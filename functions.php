@@ -54,7 +54,7 @@ function toon_auto_main()
                 <div class="stock-box-title"><?php echo $row['merk'] . " " . $row['model']?></div>
                 <div class="stock-box-img"><img src="admin/img-up/images/<?php echo $data['thumbnail_image']?>" width="205" height="" /></div>
                 <div class="stock-box-text">&euro; <?php echo $row['prijs'] ?>.0</div>
-                <div class="stock-box-plus"><a href="onderhoud.html"><div class="service-box-plus-btn"></div></a></div>
+                <div class="stock-box-plus"><a href="viewcar.php?id=<?php echo $row['id'] ?>"><div class="service-box-plus-btn"></div></a></div>
             </div>
 <?php
         /*
