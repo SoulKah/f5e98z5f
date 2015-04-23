@@ -1,0 +1,308 @@
+/*
+Theme Name: Burgerij
+Theme URI: http://www.burgerij.be
+Description: 
+Version: 1.0
+Author: Joran Schaefer
+Author URI: http://www.google.be
+Tags: burger, bla, etc
+*/
+
+body {
+	background-color:#000000;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.navbar{
+	background-color: #1c1414;
+	width: 100%;
+	box-shadow:0 0 5px #2a2a2a;
+    z-index: 999;
+    position: fixed;
+    top: -90px;
+    transition-duration: 0.5s;
+}
+
+.navbar-brand{
+	position:absolute;
+	top:0;
+    margin: -15px 0 0 0;
+}
+
+.navbar-toggle{
+	color:#fff;
+}
+
+#menu, #foto {
+	width: 100%;
+}
+
+.menu li, .page_item {
+	padding: 30px 0 15px 0;
+    margin: 0 25px 0 0;
+    height: 90px;
+    list-style-type:  none;
+    float: left;
+}
+
+
+.menu li a, .page_item a{
+    color: #b2b0b0;
+	font-size:16px;
+	text-transform:uppercase;
+    font-weight: 300;
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+.menu li a:hover, .page_item a:hover{
+    color: #c4361d;
+    transition: color 0.3s;
+}
+
+#menu .button, #fotos .button { 
+    font-size: 0.8em;
+    width: 20%;
+}
+
+.burger-img {
+    height: auto;
+    width: 100%;
+    margin: -20px 0 0 0;
+}
+
+.burger-content {
+	position: absolute;
+    top: 10%;
+    left:50%;
+    margin: 0 0 0 -550px;
+}
+
+.burger-content h1 {
+	color:#F1E7D0;
+	font-size:90px;
+	text-transform:uppercase;
+	line-height:88px;
+	font-family: 'Bree Serif', serif;
+}
+
+.burger-content h2 {
+	color:#fff;
+	font-size:30px;
+	text-transform:uppercase;
+	margin-top:100px;
+    font-family: 'Bree Serif', serif;
+}
+
+.burger-content p {
+	color:#F1E7D0;
+	font-size:19px;
+	width:40%;
+	margin-bottom:30px;
+}
+
+.button {
+	display:block;
+	margin-top:30px;
+	text-decoration:none;
+	text-align:center;
+	padding:20px 0; 
+	-webkit-border-radius:7px;
+	-moz-border-radius:7px;
+	border-radius: 7px;
+    
+	font: 1.5em "open sans", verdana, sans-serif;
+	font-weight:bold;
+	color:#fff;
+    
+ 	background-color: #c4361d;
+	background-image: -moz-linear-gradient(center top , #c4361d 0%, #a82e18 100%);
+	border: 1px solid #c4361d;
+	-webkit-box-shadow:0px 0px 2px #3d3d3d, inset 0px 0px 1px #ffffff;
+	-moz-box-shadow: 0px 0px 2px #3d3d3d,  inset 0px 0px 1px #ffffff;
+	box-shadow:0px 0px 2px #3d3d3d, inset 0px 0px 1px #ffffff;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+	text-shadow:1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.button:hover{
+    border:solid 1px #F1E7D0;
+    color:#fff;
+    text-decoration: none;
+}
+
+.button:focus{
+    color:#fff;
+}
+
+.slide-out-div {
+    background-color: #111010;
+    color: #F1E7D0;
+    border-top: 3px solid #211f1f;
+    border-bottom: 3px solid #211f1f;
+    border-right: 3px solid #211f1f;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.7);
+    height: 250px;
+    padding: 20px;
+    width: 200px;
+    z-index: 9999;
+}      
+
+.slide-out-div .button {
+    font: 1em "open sans", verdana, sans-serif;
+    padding: 10px 0; 
+}
+
+
+#content-bg {
+    background-image: url(img/content.jpg);
+    border-top: 5px #2a2a2a solid;
+}
+
+.content {
+	width:1100px;
+	margin:0 auto;
+	position:relative;
+	z-index:100;
+}
+
+.content h1 {
+    color: #c4361d;
+    font-family: "Bree Serif",serif;
+    font-size: 90px;
+    line-height: 88px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.content h2 {
+    color: #453c37;
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.row:nth-child(2), .row:nth-child(3) {
+    margin-top: 30px;
+}
+
+
+.foto {
+    margin-bottom: 20px;
+}
+
+
+#blog a{
+    text-decoration: none;
+    color: #c4361d;
+}
+
+#blog h2 {
+    font-family: "Bree Serif",serif;
+}
+
+#blog .content article {
+    min-height: 150px;
+    padding: 50px 0;
+    border-bottom: 3px solid #151515;
+}
+
+#blog article:last-child {
+    border-bottom: none;
+}
+
+
+
+@media (max-width: 1480) {
+
+    
+}
+
+@media (max-width: 1100px) {
+    .burger-content {
+        margin: 0;
+        left: 10%;
+    }
+    
+    .burger-content h1 {
+        font-size: 4em;
+        line-height:1em;
+    }
+    
+    .burger-content p {
+        font-size: 1em;
+        width: 60%
+    }
+    
+}
+
+@media (max-width: 860px) {
+    .burger-content {
+        margin: 0;
+        top: 50px;
+    }
+    
+}
+
+@media (max-width: 767px) {
+    body {
+        background-color: #2a2a2a;
+        background-image: url(img/dark_wall.png);
+    }
+
+    .burger-img{
+        visibility: hidden;
+    }
+    
+    #home {
+        height: 400px;
+    }
+    
+    .burger-content h1{
+        font-size: 3em;
+        margin: -30px 0 0 0;
+    }
+    
+    .burger-content h2{
+        visibility: hidden;
+    }
+    
+    .burger-content p{
+        width: 95%;
+    }
+    
+    .content-bg{
+        top: 0;
+        margin: -100px;
+    }
+    
+    .navbar li a {
+        height: 30px;
+        padding: 0 0 0 15px;
+    }
+    
+    .navbar li a:first-child {
+        margin: 15px 0 0 0;
+    }
+    
+    .row:nth-child(2), .row:nth-child(3) {
+        margin-top: 50px;
+    }
+    
+    #gallery-1 .gallery-item {
+        float: none !important;
+        width: 100% !important;
+    }
+    
+    #gallery-1 .gallery-icon, #gallery-1 img {
+        width: 100% !important;
+        height: auto !important;
+    }
+    
+}
