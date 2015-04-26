@@ -16,6 +16,29 @@
 <link rel='stylesheet' media='screen and (min-width: 321px) and (max-width: 1280px)' href='css/style-960.css' />
 <link rel='stylesheet' media='screen and (min-width: 1281px)' href='css/style-1100.css' />
 <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
+    
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+<link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('.fancybox').fancybox();
+
+    });
+</script>
 
 <script type="text/javascript"> 
 var $buoop = {}; 
@@ -87,7 +110,7 @@ window.onload=function(){
 </div>
     <div id="content">
         <div id="service-box-container">
-            <div id="content-title">Wij hebben ook een uitgebreid gamma aan occasies<br>Bekijk hier onze stock</div>
+            <div id="content-title">Hier kan u ons huidig wagenaanbod bekijken.<br>Voor alle bijkomstige informatie staan wij steeds ter beschikking! <a href="contact.html">Contacteer ons</a>.</div>
             
             <?php
             include 'functions.php';

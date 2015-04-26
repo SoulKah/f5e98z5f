@@ -23,7 +23,7 @@ if( isset( $_POST['image_upload'] ) && !empty( $_FILES['images'] )){
 		$image_name = $value['name'];
         
         // Auto ID ;)
-        $car_id = $_GET['id'];
+        $token = $_GET['token'];
         
 		//get image extension
 		$ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
@@ -34,8 +34,8 @@ if( isset( $_POST['image_upload'] ) && !empty( $_FILES['images'] )){
 		$image_size = $value["size"] / 1024;
 		$image_flag = true;
 		//max image size
-		$max_size = 5000;
-		if( in_array($ext, $allowedExts) && $image_size < $max_size ){
+		$max_size = 1024;
+		if( in_array($ext, $allowedExts) && $image_size < $max_size){
 			$image_flag = true;
 		} else {
 			$image_flag = false;
@@ -54,7 +54,7 @@ if( isset( $_POST['image_upload'] ) && !empty( $_FILES['images'] )){
 			$dist = "images/thumbnail_".$name;
 			$data[$i]['success'] = $thumbnail = 'thumbnail_'.$name;
 			thumbnail($src, $dist, 205);
-			$sql="INSERT INTO images (`id`, `original_image`, `thumbnail_image`, `ip_address`, `car_id`) VALUES (NULL, '$name', '$thumbnail', '$ip', '$car_id');";
+			$sql="INSERT INTO images (`id`, `original_image`, `thumbnail_image`, `ip_address`, `car_id`) VALUES (NULL, '$name', '$thumbnail', '$ip', '$token');";
 			if (!mysqli_query($con,$sql)) {
 				die('Error: ' . mysqli_error($con));
 			} 

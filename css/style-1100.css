@@ -352,6 +352,7 @@ html, body {
 	float: left;
 	width: 205px;
 	height: auto;
+    background-color: #fff;
 }
 
 #stock-box:nth-child(5n) {
@@ -414,12 +415,44 @@ html, body {
 	background-position:0 0;
 }
 
-.thumbnail {
+#stock-box .thumbnail {
   position: relative;
   width: 205px;
   height: 205px;
   overflow: hidden;
 }
+
+#stock-box .sold {
+    background-image: url(../img/verkocht.jpg);
+    background-color: #fff;
+}
+
+#stock-box .sold img {
+    opacity: 0.5;
+}
+
+#autoinfo-content .thumbnail {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+#autoinfo-content .thumbnail {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+#autoinfo-content .thumbnail:nth-child(even) {
+  margin: 0 0 10px 0;
+}
+
 .thumbnail img {
   position: absolute;
   left: 50%;
@@ -509,29 +542,29 @@ html, body {
 	background-image: url(../img/popup_polieren.jpg);
 }
 
-/* CONTACT PAGE */
+/* CONTACT & AUTO INFO PAGE */
 
-#contact-left{
+#contact-left, #autoinfo-left{
 	float: left;
 	width: 470px;
 	height: auto;
 	margin: 25px 60px 0 0;
-	background-color: #282828;
 }
 
-#contact-right{
+#contact-right, #autoinfo-right{
 	float: left;
 	width: 470px;
 	height: auto;
 	margin: 25px 0 0 0;
-	background-color: #282828;
 }
 
-#contact-content{
+#contact-content, #autoinfo-content{
 	float: left;
 	width: 450px;
 	height: auto;
 	padding:10px;
+    background-color: #282828;
+    margin: 0 0 25px 0;
 	
 	/*FONT CONFIG*/
 	font-family: GeosansLight;
@@ -539,7 +572,28 @@ html, body {
 	color: #fff;	
 }
 
-#contact-title{
+#autoinfo-content {
+    line-height: 20px;
+}
+
+#autoinfo-content ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0; 
+}
+
+#autoinfo-content li{
+    line-height: 30px;
+    list-style-type: none;
+    background-image: url(../img/check-box.png);
+    background-repeat: no-repeat;
+    background-position: 0px center;
+    padding: 0 0 0 30px;
+}
+
+
+
+#contact-title, #autoinfo-title{
 	float: left;
 	width: 450px;
 	height: auto;

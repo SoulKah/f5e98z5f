@@ -14,7 +14,8 @@
 	<div class="container">
 		<h1 class="page-title" >Ajax Image Upload Using jQuery, PHP and MySQL</h1>
 		<div class="form-container">
-			<form enctype="multipart/form-data" name='imageform' role="form" id="imageform" method="post" action="ajax.php?id=1">
+            <?php $token = $_GET['token']; ?>
+			<form enctype="multipart/form-data" name='imageform' role="form" id="imageform" method="post" action="ajax.php?token=<?php echo $token; ?>">
 				<div class="form-group">
 					<p>Please Choose Image: </p>
 					<input class='file' multiple="multiple" type="file" class="form-control" name="images[]" id="images" placeholder="Please choose your image">

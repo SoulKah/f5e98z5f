@@ -8,7 +8,7 @@ sec_session_start();
 <html>
 	<head>
         <title>DEV</title>
-        <link href="../css/style.css" rel="stylesheet" type="text/css">
+        <link href="../css/admin.css" rel="stylesheet" type="text/css">
         
         <!-- Add Awesomefont -->
         <link href="../css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -54,69 +54,92 @@ sec_session_start();
     <body>
     <?php if (login_check($mysqli) == true) : ?>
     <div id="wrapper">
-    <div id="left">
-        <div id="left-wrap">
-            <h1>ACP</h1>
-            <h3>Welcome, <?php echo htmlentities($_SESSION['username']); ?>!</h3>
-            <nav>
-                <ul>
-                    <li class="current"><a href="index.php">Overzicht <i class="fa fa-list"></i></a></li>
-                    <li><a href="toevoegen.php?type=auto" class='various fancybox.iframe'>Wagen toevoegen <i class="fa fa-user-plus"></i></a></li>
-                    <li><a href="includes/logout.php">Uitloggen <i class="fa fa-sign-out"></i></a></li>
-                </ul>
-            </nav>
+        <div id="left">
+            <div id="left-wrap">
+                <h1>ACP</h1>
+                <h3>Welcome, <?php echo htmlentities($_SESSION['username']); ?>!</h3>
+                <nav>
+                    <ul>
+                        <li class="current"><a href="view.php">Overzicht <i class="fa fa-list"></i></a></li>
+                        <li><a href="add.php?type=auto">Wagen toevoegen <i class="fa fa-user-plus"></i></a></li>
+                        <li><a href="includes/logout.php">Uitloggen <i class="fa fa-sign-out"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-    <div id="right">
-        
-            
-        <?php
-            include '../functions.php';
-            include '../config/config.php';
-            dbconnect();
+        <div id="right">
+            <div id="right-wrap">
 
-            if($connect)
-            {
-            ?>
-                <h1>Wagens in stock</h1><br>
-                <table width='100%'>
-                <thead>
-                    <tr>
-                        <th>Merk</th>
-                        <th>Model</th>
-                        <th>Jaar</th>
-                        <th>Cilinder</th>
-                        <th>PK</th>
-                        <th>Vermogen</th>
-                        <th>Kleur</th>
-                        <th>Deuren</th>
-                        <th>Versnellingen</th>
-                        <th>Foto's</th>
-                        <th>Wijzig</th>
-                        <th>Verwijder</th>
-                    </tr>
-                </thead>
-                <?php
-                toon_autos();
-                ?>
 
             <?php
-                mysqli_close($connect);
-            }
+                include '../functions.php';
+                include '../config/config.php';
+                dbconnect();
 
-            else
-            {
-                die("Kan geen verbinding maken met de database");   
-            }
-        ?>
-        
-    </div>   
+                if($connect)
+                {
+                ?>
+                <a href="#" id="toggleNav"><i class="fa fa-chevron-left arrow fa-3x"></i></a>
+                    <h1>Wagens in stock</h1><br>
+                    <table width='100%'>
+                    <thead>
+                        <tr>
+                            <th>Merk</th>
+                            <th>Model</th>
+                            <th>Jaar</th>
+                            <th>Cilinder</th>
+                            <th>PK</th>
+                            <th>Vermogen (Kw)</th>
+                            <th>Kleur</th>
+                            <th>Deuren</th>
+                            <th>Versnellingen</th>
+                            <th>Foto's</th>
+                            <th>Wijzig</th>
+                            <th>Verwijder</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    toon_autos();
+                    ?>
+                        
+                    <h1>Verkochte wagens</h1><br>
+                    <table width='100%'>
+                    <thead>
+                        <tr>
+                            <th>Merk</th>
+                            <th>Model</th>
+                            <th>Jaar</th>
+                            <th>Cilinder</th>
+                            <th>PK</th>
+                            <th>Vermogen (Kw)</th>
+                            <th>Kleur</th>
+                            <th>Deuren</th>
+                            <th>Versnellingen</th>
+                            <th>Foto's</th>
+                            <th>Wijzig</th>
+                            <th>Verwijder</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    toon_verkochte_autos();
+
+                    mysqli_close($connect);
+                }
+
+                else
+                {
+                    die("Kan geen verbinding maken met de database");   
+                }
+            ?>
+            </div>
+        </div>   
     </div>
-    <?php else : ?>
-        <p>
-            <span class="error">You are not authorized to access this page.</span> Please <a href="index.php">login</a>.
-        </p>
-    <?php endif; ?>
+    <?php else :
+        header("Location: ../admin");
+    endif; ?>
     </body>
     
 </html>
+        
+                <!-- Add Nav Slide -->
+        <script src="../admin/js/nav.js"></script>
