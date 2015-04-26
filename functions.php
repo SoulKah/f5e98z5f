@@ -44,7 +44,7 @@ function toon_autos()
         <td width='5%'>".$row['versnellingen']. "</td>
         <td width='5%'>".$data['total']."</td>
         <td width='1%'><a href='wijzig.php?id=".$row['token']."&type=auto&saved=false'  class='various fancybox.iframe'><i class='fa fa-pencil-square-o fa-2x'></a></td>
-        <td width='1%'><a href='verwijderen.php?id=".$row['id']."&type=auto' id='delete' class='various fancybox.iframe' onclick='ConfirmDelete()'><i class='fa fa-trash fa-2x'></i></a></td>";
+        <td width='1%'><a href='verwijderen.php?id=".$row['token']."&type=auto' id='delete' class='various fancybox.iframe' onclick='ConfirmDelete()'><i class='fa fa-trash fa-2x'></i></a></td>";
         echo "</tr>";
     }
     echo "</table>";
