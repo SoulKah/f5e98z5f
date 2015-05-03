@@ -584,7 +584,7 @@ html, body {
     line-height: 20px;
 }
 
-#autoinfo-content:nth-child(3) {
+#autoinfo-content:nth-child(odd) {
 	padding:10px 10px 0 10px;
 }
 
