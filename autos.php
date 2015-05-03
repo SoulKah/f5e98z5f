@@ -68,9 +68,9 @@ window.onload=function(){
 	<div id="nav-stroke">
 	<div id="nav">
 		<ul>
-			<a href="index.html"><li class="selected">Home</li></a>
+			<a href="index.html"><li>Home</li></a>
 			<a href="service.html"><li>Service</li></a>
-            <a href="racing.html"><li>Racing</li></a>
+            <a href="autos.php"><li class="selected">Occasies</li></a>
 			<a href="ligging.html"><li>Ligging</li></a>
 			<a href="contact.html"><li>Contact</li></a>
 		</ul>
@@ -113,14 +113,12 @@ window.onload=function(){
             <div id="content-title">Hier kan u ons huidig wagenaanbod bekijken.<br>Voor alle bijkomstige informatie staan wij steeds ter beschikking! <a href="contact.html">Contacteer ons</a>.</div>
             
             <?php
-            include 'functions.php';
-            include 'config/config.php';
-            dbconnect();
+            include_once 'admin/includes/_functions.php';
+            include_once 'admin/includes/_connect.php';
 
-            if($connect)
+            if($mysqli)
             {
-                toon_auto_main();
-                mysqli_close($connect);
+                toon_auto_main($mysqli);
             }
 
             else

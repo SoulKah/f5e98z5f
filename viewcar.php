@@ -68,9 +68,9 @@ window.onload=function(){
 	<div id="nav-stroke">
 	<div id="nav">
 		<ul>
-			<a href="index.html"><li class="selected">Home</li></a>
+			<a href="index.html"><li>Home</li></a>
 			<a href="service.html"><li>Service</li></a>
-            <a href="racing.html"><li>Racing</li></a>
+            <a href="autos.php"><li class="selected">Occasies</li></a>
 			<a href="ligging.html"><li>Ligging</li></a>
 			<a href="contact.html"><li>Contact</li></a>
 		</ul>
@@ -113,26 +113,16 @@ window.onload=function(){
             <div id="autoinfo-left">
  
                 <?php
-                include 'functions.php';
-                include 'config/config.php';
-                dbconnect();
-
-                if($connect)
-                {
-                    auto_bekijken();
-                }
-
-                else
-                {
-                    die("Kan geen verbinding maken met de database");   
-                }
+                include_once 'admin/includes/_functions.php';
+                include_once 'admin/includes/_connect.php';
+                auto_bekijken($mysqli);
                 ?>
             
             </div>
             <div id="autoinfo-right">
                 <div id="autoinfo-title">Fotos</div>
                 <div id="autoinfo-content">
-                    <?php auto_get_pics(); ?>
+                    <?php auto_get_pics($mysqli); ?>
                 </div>
             </div>
         </div>      

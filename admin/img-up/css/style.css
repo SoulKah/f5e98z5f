@@ -17,16 +17,32 @@ h1{
 	text-align:center;
 	margin:5% auto 2%;
 }
+
+.form-container a{
+    text-decoration: none;
+}
+
 .form-group p{display: inline-block;}
 form input{margin-bottom: 2%;}
 .btn{
 	width: 15%;
 	height: 40px;
-	background-color: #7fbb00;
-	border: 1px solid #7fbb00;
+	background-color: #0d77b6;
 	color: #fff;
 	margin-top: 2%;
+    cursor: pointer;
+    border: none;
 }
+
+.save {
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 5%;
+	background-color: #7fbb00;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
 .file{
 	height: 30px;
 	margin-bottom: 0;

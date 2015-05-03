@@ -1,5 +1,7 @@
 <?php
-require_once 'config.php';
+include_once '../../config/config.php';
+include_once '../includes/_connect.php';
+
 $data = array();
 if( isset( $_POST['image_upload'] ) && !empty( $_FILES['images'] )){
 	//get the structured array
@@ -34,7 +36,7 @@ if( isset( $_POST['image_upload'] ) && !empty( $_FILES['images'] )){
 		$image_size = $value["size"] / 1024;
 		$image_flag = true;
 		//max image size
-		$max_size = 1024;
+		$max_size = 5120;
 		if( in_array($ext, $allowedExts) && $image_size < $max_size){
 			$image_flag = true;
 		} else {
@@ -54,13 +56,13 @@ if( isset( $_POST['image_upload'] ) && !empty( $_FILES['images'] )){
 			$dist = "images/thumbnail_".$name;
 			$data[$i]['success'] = $thumbnail = 'thumbnail_'.$name;
 			thumbnail($src, $dist, 205);
-			$sql="INSERT INTO images (`id`, `original_image`, `thumbnail_image`, `ip_address`, `car_id`) VALUES (NULL, '$name', '$thumbnail', '$ip', '$token');";
-			if (!mysqli_query($con,$sql)) {
-				die('Error: ' . mysqli_error($con));
+			$sql = "INSERT INTO images (`id`, `original_image`, `thumbnail_image`, `ip_address`, `car_id`) VALUES (NULL, '$name', '$thumbnail', '$ip', '$token');";
+			if (!mysqli_query($mysqli, $sql)) {
+				die('Error: ' . mysqli_error($mysqli));
 			} 
 		}
 	}
-	mysqli_close($con);
+	mysqli_close($mysqli);
 	echo json_encode($data);
 	
 } else {

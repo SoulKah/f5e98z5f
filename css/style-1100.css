@@ -432,43 +432,50 @@ html, body {
 }
 
 #autoinfo-content .thumbnail {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  overflow: hidden;
-  float: left;
-  margin: 0 10px 0 0;
+    position: relative;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+    float: left;
+    margin: 0 10px 0 0;
 }
 
 #autoinfo-content .thumbnail {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  overflow: hidden;
-  float: left;
-  margin: 0 10px 10px 0;
+    position: relative;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+    float: left;
+    margin: 0 10px 10px 0;
 }
 
 #autoinfo-content .thumbnail:nth-child(even) {
-  margin: 0 0 10px 0;
+    margin: 0 0 10px 0;
 }
 
 .thumbnail img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: auto;
-  -webkit-transform: translate(-50%,-50%);
-      -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 .thumbnail img.portrait {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 /* SERVICE POPUP CSS */
+
+#popup-service-box{
+	float: left;
+	width: 300px;
+	height: 490px;
+	background-color: rgba(21,21,21,0.80);
+}
 
 #popup-service-box{
 	float: left;
@@ -572,8 +579,13 @@ html, body {
 	color: #fff;	
 }
 
-#autoinfo-content {
+#autoinfo-content{
+	padding:10px;
     line-height: 20px;
+}
+
+#autoinfo-content:nth-child(3) {
+	padding:10px 10px 0 10px;
 }
 
 #autoinfo-content ul{
@@ -591,7 +603,13 @@ html, body {
     padding: 0 0 0 30px;
 }
 
-
+#autoinfo-content label{
+    color: #999;
+    display: block;
+    width: 150px;
+    float: left;
+    line-height: 25px;
+}
 
 #contact-title, #autoinfo-title{
 	float: left;

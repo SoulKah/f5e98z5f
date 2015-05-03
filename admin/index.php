@@ -1,9 +1,9 @@
-
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
- 
-sec_session_start();
+ob_start();
+session_start();
+
+include_once 'includes/_connect.php';
+include_once 'includes/_functions.php';
  
 if (login_check($mysqli) == true) {
     $logged = 'in';
@@ -14,7 +14,7 @@ if (login_check($mysqli) == true) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Secure Login: Log In</title>
+        <title>Admin Control Panel Login</title>
         <link rel="stylesheet" href="css/style.css" />
         <script type="text/JavaScript" src="js/sha512.js"></script> 
         <script type="text/JavaScript" src="js/forms.js"></script> 
@@ -32,12 +32,12 @@ if (login_check($mysqli) == true) {
             
             <p>
               <label for="login">Email:</label>
-              <input type="text" name="email" id="login" value="name@example.com">
+              <input type="text" name="email" id="login" placeholder="admin@example.com">
             </p>
 
             <p>
               <label for="password">Password:</label>
-              <input type="password" name="password" id="password" value="4815162342">
+              <input type="password" name="password" id="password" placeholder="password">
             </p>
 
             <p class="login-submit">
@@ -50,9 +50,9 @@ if (login_check($mysqli) == true) {
             echo "<p>If you don't have a login, please <a href='register.php'>register</a></p>";*/
         } 
 
-        else {
-            echo '<p>Currently logged ' . $logged . ' as <span class="current">' . ucfirst(htmlentities($_SESSION['username'])) . '</span>.</p>';
-            echo '<p><a href="includes/logout.php">Inloggen op andere acccount</a>.</p>';
+        else
+        {
+            header('Location: view.php');
         }
 ?>     
        </div>

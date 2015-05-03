@@ -7,18 +7,16 @@
 /\_____\  \ \_____\  \ \_\ \_\  \ \_\ \_\  \ \_\\"\_\     \/\_____\  \ \_____\  \ \_\ \_\  \ \_\ \_\  \ \_____\  \ \_\    \ \_____\  \ \_\ \_\ 
 \/_____/   \/_____/   \/_/ /_/   \/_/\/_/   \/_/ \/_/      \/_____/   \/_____/   \/_/\/_/   \/_/\/_/   \/_____/   \/_/     \/_____/   \/_/ /_/ 
 
-/ AUTO DEALER SYSTEEM 1.0 /
+/ ©Garageheuten.be /
                                                                                                                                                
 */
 
 
+define("hostname", "localhost");
+define("username", "root");
+define("password", "");
+define("database", "autodealer");
+define('BASE_PATH','');
 
-// SQL CONNECTION CONFIG
 
-$connection['hostname'] = 'localhost'; 
-$connection['username'] = 'root'; 
-$connection['password'] = ''; 
-$connection['database'] = 'autodealer'; 
-
-// TODO: MEER CFG VARS (:
 ?>

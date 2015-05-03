@@ -1,9 +1,9 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
-require_once 'img-up/config.php';
+include_once 'includes/_connect.php';
+include_once 'includes/_functions.php';
  
-sec_session_start();
+session_start();
+if (login_check($mysqli) == true) :
 ?>
 <html>
 <head>
@@ -17,25 +17,33 @@ sec_session_start();
 <script src="ckeditor/ckeditor.js"></script>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+<script language="JavaScript" type="text/javascript">
+    $(document).ready(function(){
+        $("a.delete").click(function(e){
+            if(!confirm('Weet je zeker dat je deze foto wil verwijderen?')){
+                e.preventDefault();
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
 </head>
     
 <body>
-<?php if (login_check($mysqli) == true) : ?>
+
 <div id="popup-wrapper">
 <?php
-    $connect=mysqli_connect("localhost","root","","autodealer");
-    if (mysqli_connect_errno()) {
-        throw new Exception(mysqli_connect_error(), mysqli_connect_errno());
-    }
 
     $type = $_GET['type']; 
 
-    if($connect && $type == "auto")
+    if($mysqli && $type == "auto")
     {   
         if (!$_POST)
         {
             $wijzig_id = $_GET['id']; 
-            $query = mysqli_query($connect, "SELECT * FROM autos WHERE token = '$wijzig_id'");
+            $query = mysqli_query($mysqli, "SELECT * FROM autos WHERE token = '$wijzig_id'");
             if (!$query) {
                     die('Invalid query: ' . mysql_error());
             }
@@ -43,6 +51,9 @@ sec_session_start();
             // Tonen dat er opgeslagen werd :)
             if ($_GET['saved'] == 'true')
                 echo "<div class='saved'><i class='fa fa-check'></i> Deze wagen werd succesvol opgeslagen!</div>";
+            
+            else if ($_GET['saved'] == '2')
+                echo "<div class='saved'><i class='fa fa-check'></i> De foto werd verwijderd!</div>";
             
             ?>
             <form action="wijzig.php?type=auto" method='POST'>
@@ -125,7 +136,7 @@ sec_session_start();
                         </td>
                     </tr>
                     <tr>
-                        <input type='hidden' name='id' value='<?php echo $row['id']?>'>
+                        <input type='hidden' name='id' value='<?php echo $row['token']?>'>
                         <td colspan='2'>
                             <input type='submit' name='wijzigen' value='Opslaan'/>
                             <input type="checkbox" name="verkocht" value="1"/> Markeer als verkocht
@@ -135,11 +146,11 @@ sec_session_start();
                 </form>
     
                 <h1>Foto's van deze wagen:</h1>
-                <div class="thumbnail-box">
+                <div class="thumbnail-box clearfix" id="images">
     
                     <?php
                 
-                    $stmt = $connect->prepare('SELECT * FROM images WHERE car_id = ?');
+                    $stmt = $mysqli->prepare('SELECT * FROM images WHERE car_id = ?');
                     $stmt->bind_param('s', $wijzig_id);
 
                     $stmt->execute();
@@ -153,37 +164,12 @@ sec_session_start();
                     else {
                         while ($row = $query->fetch_assoc()) {
 
-                            echo "<div class='thumbnail'><a href='#'><img src='img-up/images/".$row['thumbnail_image']."' width='' height='' class='portrait car-thumb'/></a></div>";
+                            echo "<div class='thumbnail'><a href='verwijderen.php?type=img&id=".$row['id']."' class='delete'><img src='img-up/images/".$row['thumbnail_image']."' width='' height='' class='portrait car-thumb'/></a></div>";
                         }
                     }
                     ?>
                 </div>
-    
-                <!--<form enctype="multipart/form-data" name='imageform' role="form" id="imageform" method="post" action="img-up/ajax.php?id=<?php echo $wijzig_id ?>">
-                    <div class="form-group">
-                        <h1>Foto's toevoegen:</h1>
-                        <input class='file' multiple="multiple" type="file" class="form-control" name="images[]" id="images" placeholder="Please choose your image">
-                        <span class="help-block"></span>
-                    </div>
-                    <div id="loader" style="display: none;">
-                        Laden...
-                    </div>
-                    <input type="submit" value="Upload" name="image_upload" id="image_upload" class="btn"/>
-                </form>
-
-                <div class="clearfix"></div>
-                <div id="uploaded_images" class="uploaded-images">
-                    <div id="error_div">
-                    </div>
-                    <div id="success_div">
-                    </div>
-                </div>
-    
-                <input type="hidden" id='base_path' value="<?php echo BASE_PATH; ?>">
-                <script src="img-up/js/jquery.min.js"></script>
-                <script type="text/javascript" src="img-up/js/jquery.form.min.js"></script>
-                <script src="img-up/js/script.js"></script>
-                -->
+                <a href="img-up/index.php?token=<?php echo $wijzig_id ?>" class="btn">Foto's  toevoegen</a>
                 <?php
             
             }
@@ -203,44 +189,25 @@ sec_session_start();
             $brandstof = $_POST['brandstof'];
             $opties = $_POST['editor1'];
             $id = $_POST['id'];
+            $verkocht = $_POST['verkocht'];
             
-            if (!isset($_POST['verkocht']) || empty($_POST['verkocht']))
-            {
-                $verkocht = '0';
-            }
-            
-            else
-            {
-                $verkocht = '1';
-            }
-
-            $query = mysqli_query($connect, "UPDATE autos SET merk = '$merk', model = '$model', jaar = '$jaar', cilinder = '$cilinder', pk = '$pk', vermogen = '$vermogen', kleur = '$kleur', opties = '$opties', verkocht = '$verkocht' WHERE id='$id'");
+            $query = mysqli_query($mysqli, "UPDATE autos SET merk = '$merk', model = '$model', jaar = '$jaar', cilinder = '$cilinder', pk = '$pk', vermogen = '$vermogen', kleur = '$kleur', opties = '$opties', verkocht = '$verkocht' WHERE id='$id'");
             
             if (!$query) {
                 die('Invalid query: ' . mysql_error());
             }
-            
-            // Pagina herladen na wijziging
-            header("Refresh:0; url=wijzig.php?id=$id&type=auto&saved=true");
+            header("Location: wijzig.php?id=". $id ."&type=auto&saved=true");
         }
     }
 
     
-    // OK, THANKS, BYE! :]
-    mysqli_close($connect);
-
-    if (!$connect)
+    if (!$mysqli)
     {
         die ("Kan geen verbinding maken met de database");   
     }
 
 ?>
-    
-    <?php else :
-        header("Location: ../admin");
-    endif; ?>
 </div>
-
 
 <!-- "Saved" div laten faden na 2 sec ;] -->
 <script>
@@ -255,3 +222,7 @@ $(document).ready(function(){
                 
 </body>
 </html>
+
+<?php else :
+    header("Location: ../admin");
+endif; ?>

@@ -1,67 +1,40 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
+include_once 'includes/_connect.php';
+include_once 'includes/_functions.php';
  
-sec_session_start();
+session_start();
+
+if (login_check($mysqli) == true) :
 ?>
+
 <!doctype html>
 <html>
 	<head>
-        <title>DEV</title>
-        <link href="../css/admin.css" rel="stylesheet" type="text/css">
-        
-        <!-- Add Awesomefont -->
-        <link href="../css/font-awesome.css" rel="stylesheet" type="text/css">
-        
-        <!-- Add jQuery library -->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-        <!-- Add fancyBox -->
-        <link rel="stylesheet" href="../fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-        <script type="text/javascript" src="../fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-        <!-- Optionally add helpers - button, thumbnail and/or media -->
-        <link rel="stylesheet" href="../fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
-        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
-
-        <link rel="stylesheet" href="../fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
-        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-        
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $(".fancybox").fancybox();
-            });
-            
-            $(document).ready(function() {
-                $(".various").fancybox({
-
-                    fitToView	: false,
-                    width		: '70%',
-                    height		: '70%',
-                    autoSize	: false,
-                    closeClick	: false,
-                    openEffect	: 'fade',
-                    closeEffect	: 'fade',
-                    afterClose  : function() { document.location.reload(true) }
+        <title>Admin Control Panel</title>
+        <?php include_once "includes/_scripts.php"; ?>
+        <script language="JavaScript" type="text/javascript">
+            $(document).ready(function(){
+                $("a.delete").click(function(e){
+                    if(!confirm('Weet je zeker dat je deze wagen wil verwijderen?')){
+                        e.preventDefault();
+                        return false;
+                    }
+                    return true;
                 });
             });
-            
         </script>
-        
 	</head>
     
     <body>
-    <?php if (login_check($mysqli) == true) : ?>
     <div id="wrapper">
         <div id="left">
             <div id="left-wrap">
                 <h1>ACP</h1>
-                <h3>Welcome, <?php echo htmlentities($_SESSION['username']); ?>!</h3>
+                <h3>Welkom, <?php echo htmlentities($_SESSION['username']); ?>!</h3>
                 <nav>
                     <ul>
                         <li class="current"><a href="view.php">Overzicht <i class="fa fa-list"></i></a></li>
-                        <li><a href="add.php?type=auto">Wagen toevoegen <i class="fa fa-user-plus"></i></a></li>
+                        <li><a href="add.php?type=auto">Wagen toevoegen <i class="fa fa-car"></i></a></li>
                         <li><a href="includes/logout.php">Uitloggen <i class="fa fa-sign-out"></i></a></li>
                     </ul>
                 </nav>
@@ -72,14 +45,11 @@ sec_session_start();
 
 
             <?php
-                include '../functions.php';
-                include '../config/config.php';
-                dbconnect();
 
-                if($connect)
+                if($mysqli)
                 {
                 ?>
-                <a href="#" id="toggleNav"><i class="fa fa-chevron-left arrow fa-3x"></i></a>
+                <a href="#" id="toggleNav"><i class="fa fa-chevron-right arrow fa-3x"></i><span class='toggle'>Toon navigatie</span></a>
                     <h1>Wagens in stock</h1><br>
                     <table width='100%'>
                     <thead>
@@ -89,7 +59,7 @@ sec_session_start();
                             <th>Jaar</th>
                             <th>Cilinder</th>
                             <th>PK</th>
-                            <th>Vermogen (Kw)</th>
+                            <th>Vermogen (kW)</th>
                             <th>Kleur</th>
                             <th>Deuren</th>
                             <th>Versnellingen</th>
@@ -99,7 +69,7 @@ sec_session_start();
                         </tr>
                     </thead>
                     <?php
-                    toon_autos();
+                    toon_autos($mysqli);
                     ?>
                         
                     <h1>Verkochte wagens</h1><br>
@@ -111,7 +81,7 @@ sec_session_start();
                             <th>Jaar</th>
                             <th>Cilinder</th>
                             <th>PK</th>
-                            <th>Vermogen (Kw)</th>
+                            <th>Vermogen (kW)</th>
                             <th>Kleur</th>
                             <th>Deuren</th>
                             <th>Versnellingen</th>
@@ -121,9 +91,7 @@ sec_session_start();
                         </tr>
                     </thead>
                     <?php
-                    toon_verkochte_autos();
-
-                    mysqli_close($connect);
+                    toon_verkochte_autos($mysqli);
                 }
 
                 else
@@ -134,12 +102,15 @@ sec_session_start();
             </div>
         </div>   
     </div>
-    <?php else :
-        header("Location: ../admin");
-    endif; ?>
+            
+    <!-- Add Nav Slide -->
+    <script type="text/javascript" src="../admin/js/nav.js"></script>
+            
     </body>
     
 </html>
         
-                <!-- Add Nav Slide -->
-        <script src="../admin/js/nav.js"></script>
+<?php else :
+    header("Location: ../admin");
+    die();
+endif; ?>

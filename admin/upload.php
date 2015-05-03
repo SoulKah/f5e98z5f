@@ -1,12 +1,8 @@
 <?php
-
-include_once '../../config/config.php';
-include_once '../includes/_connect.php';
-include_once '../includes/_functions.php';
+include_once 'includes/_connect.php';
+include_once 'includes/_functions.php';
  
 session_start();
-
-$id = $_GET['token'];
 
 if (login_check($mysqli) == true) :
 ?>
@@ -31,17 +27,6 @@ if (login_check($mysqli) == true) :
 					Uploaden...
 				</div>
 				<input type="submit" value="Upload" name="image_upload" id="image_upload" class="btn"/>
-                <br>
-                <?php
-                if (strpos($_SERVER['HTTP_REFERER'], 'add') !== false)
-                {
-                    echo '<a href="../../admin/view.php" class="save">Keer terug</a>';
-                }
-                else
-                {
-                    echo '<a href="../../admin/wijzig.php?id='.$id.'&type=auto&saved=true" class="save">Keer terug</a>';
-                }  
-                ?>
 			</form>
 		</div>
 		<div class="clearfix"></div>
@@ -49,6 +34,7 @@ if (login_check($mysqli) == true) :
 			<div id="error_div">
 			</div>
 			<div id="success_div">
+                <a href="../../admin/view.php"><input type="button" value="Opslaan" class="btn"/></a>
 			</div>
 		</div>
 	</div>

@@ -1,62 +1,67 @@
 <?php
-$connect = mysqli_connect("localhost","root","","autodealer");
-if (mysqli_connect_errno()) {
-    throw new Exception(mysqli_connect_error(), mysqli_connect_errno());
-}
+include_once 'includes/_connect.php';
+include_once 'includes/_functions.php';
 
-$type = $_GET['type']; 
+session_start();
 
-if($connect && $type == "auto")
+if (login_check($mysqli) == true)
 {
-    $delete_id = $_GET['id']; 
 
-    $stmt = $connect->prepare('DELETE FROM autos WHERE token = ?');
-    $stmt->bind_param('s', $delete_id);
-    $stmt->execute();
+    $type = $_GET['type']; 
 
-    $stmt = $connect->prepare('SELECT * FROM images WHERE car_id= ?');
-    $stmt->bind_param('s', $delete_id);
-    $stmt->execute();
-    $query = $stmt->get_result();
-    
-    while ($row = $query->fetch_assoc()) {
-
-        $original = "img-up/images/".$row['original_image']."";
-        $thumbnail = "img-up/images/".$row['thumbnail_image']."";
-        // See if it exists before attempting deletion on it
-        if (file_exists($original) && file_exists($thumbnail)) {
-            unlink($original); // Delete original img
-            unlink($thumbnail); // Delete thumbnail img
-        } 
-        // See if it exists again to be sure it was removed
-        if (file_exists($original) && file_exists($thumbnail)) {
-            echo "Problem deleting " . $original. "<br>";
-            echo "Problem deleting " . $thumbnail. "<br>";
-        }
-        else {
-            echo "Deleted: " .$original. "<br>";
-            echo "Deleted: " .$thumbnail. "<br>";
-        }
-    }
-    
-    $stmt = $connect->prepare('DELETE FROM images WHERE car_id = ?');
-    $stmt->bind_param('s', $delete_id);
-    $stmt->execute();
-
-    echo "Deleted: Wagen";
-    mysqli_close($connect);
-}
-
-if ($connect && $type == "foto")
-{
-    $delete_id = $_GET['id']; 
-    $del = mysqli_query($connect, "DELETE FROM images WHERE id = $delete_id");
-    if ($del)
+    if($mysqli && $type == "auto")
     {
-        echo "Foto: verwijderd!";
+        $delete_id = $_GET['id']; 
+
+        $stmt = $mysqli->prepare('DELETE FROM autos WHERE token = ?');
+        $stmt->bind_param('s', $delete_id);
+        $stmt->execute();
+
+        $stmt = $mysqli->prepare('SELECT * FROM images WHERE car_id= ?');
+        $stmt->bind_param('s', $delete_id);
+        $stmt->execute();
+        $query = $stmt->get_result();
+
+        while ($row = $query->fetch_assoc()) {
+
+            $original = "img-up/images/".$row['original_image']."";
+            $thumbnail = "img-up/images/".$row['thumbnail_image']."";
+            // See if it exists before attempting deletion on it
+            if (file_exists($original) && file_exists($thumbnail)) {
+                unlink($original); // Delete original img
+                unlink($thumbnail); // Delete thumbnail img
+            } 
+            // See if it exists again to be sure it was removed
+            if (file_exists($original) && file_exists($thumbnail)) {
+                echo "Problem deleting " . $original. "<br>";
+                echo "Problem deleting " . $thumbnail. "<br>";
+            }
+        }
+
+        $stmt = $mysqli->prepare('DELETE FROM images WHERE car_id = ?');
+        $stmt->bind_param('s', $delete_id);
+        $stmt->execute();
+
+        mysqli_close($mysqli);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
     }
-    else
-        echo "Failed";
-    mysqli_close($connect);
+
+    if ($mysqli && $type == "img")
+    {
+        $delete_id = $_GET['id']; 
+        $del = mysqli_query($mysqli, "DELETE FROM images WHERE id = $delete_id");
+        if ($del)
+        {
+            mysqli_close($mysqli);
+            header('Location: ' . $_SERVER['HTTP_REFERER']. '#images');
+            exit();
+        }
+        else
+            echo "Failed";
+    }
 }
+
+else 
+    header("Location: ../admin");
 ?>
